@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: mysql-silguagaitan.alwaysdata.net
--- Tiempo de generación: 01-07-2024 a las 00:21:38
+-- Tiempo de generación: 02-07-2024 a las 00:55:24
 -- Versión del servidor: 10.6.17-MariaDB
 -- Versión de PHP: 7.4.33
 
@@ -57,9 +57,9 @@ INSERT INTO `Cartas` (`ID_carta`, `Nombre_carta`, `Descripcion`) VALUES
 (17, 'La Torre', 'Simboliza la destrucción repentina, la revelación de la verdad oculta y el cambio dramático que conduce a la renovación.'),
 (18, 'La Luna', 'Simboliza la intuición, los sueños, los misterios ocultos y la ilusión. Es el mundo del subconsciente y lo desconocido.'),
 (19, 'El Sol', 'Representa la alegría, la felicidad, el éxito y la claridad. Es la iluminación y la energía positiva que trae vitalidad y creatividad.'),
-(41, 'El Juicio', 'Simboliza el despertar espiritual, la evaluación, el perdón y la recompensa. Es la resolución de conflictos internos y la aceptación de responsabilidad.\r\n\r\n'),
-(42, 'El Mundo', 'Representa la realización, la integración, el éxito y la culminación de un ciclo. Es la unidad con el universo y la consecución de metas.'),
-(43, 'El Loco', 'Simboliza la espontaneidad, la libertad, el potencial ilimitado y el inicio de un nuevo viaje. Es la inocencia y la búsqueda de la verdad.');
+(20, 'El Juicio', 'Simboliza el despertar espiritual, la evaluación, el perdón y la recompensa. Es la resolución de conflictos internos y la aceptación de responsabilidad.\r\n\r\n'),
+(21, 'El Mundo', 'Representa la realización, la integración, el éxito y la culminación de un ciclo. Es la unidad con el universo y la consecución de metas.'),
+(22, 'El Loco', 'Simboliza la espontaneidad, la libertad, el potencial ilimitado y el inicio de un nuevo viaje. Es la inocencia y la búsqueda de la verdad.');
 
 -- --------------------------------------------------------
 
@@ -104,6 +104,23 @@ CREATE TABLE `Consulta_cliente` (
   `ID_Carta` int(2) NOT NULL,
   `Motivo_consulta` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `Consulta_cliente`
+--
+
+INSERT INTO `Consulta_cliente` (`ID_consulta`, `ID_Cliente`, `ID_Evaluacion`, `ID_Carta`, `Motivo_consulta`) VALUES
+(1, 1, 111, 6, 'Dinero'),
+(5, 2, 222, 13, 'Amor'),
+(7, 3, 333, 1, 'Amor'),
+(9, 4, 444, 5, 'Salud'),
+(11, 5, 555, 19, 'Dinero'),
+(13, 6, 666, 1, 'Amor'),
+(15, 7, 777, 13, 'Dinero'),
+(19, 8, 888, 8, 'Dinero'),
+(21, 9, 999, 8, 'Amor'),
+(27, 10, 100, 7, 'Dinero'),
+(29, 11, 101, 14, 'Salud');
 
 -- --------------------------------------------------------
 
@@ -156,9 +173,9 @@ ALTER TABLE `Clientes`
 --
 ALTER TABLE `Consulta_cliente`
   ADD PRIMARY KEY (`ID_consulta`),
-  ADD KEY `consulta_evaluacion` (`ID_Evaluacion`),
-  ADD KEY `consulta_cliente` (`ID_Cliente`),
-  ADD KEY `consulta_carta` (`ID_Carta`);
+  ADD KEY `ID_Cliente` (`ID_Cliente`),
+  ADD KEY `ID_Evaluacion` (`ID_Evaluacion`),
+  ADD KEY `ID_Carta` (`ID_Carta`);
 
 --
 -- Indices de la tabla `Evaluacion`
@@ -187,7 +204,7 @@ ALTER TABLE `Clientes`
 -- AUTO_INCREMENT de la tabla `Consulta_cliente`
 --
 ALTER TABLE `Consulta_cliente`
-  MODIFY `ID_consulta` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_consulta` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `Evaluacion`
@@ -203,7 +220,9 @@ ALTER TABLE `Evaluacion`
 -- Filtros para la tabla `Consulta_cliente`
 --
 ALTER TABLE `Consulta_cliente`
-  ADD CONSTRAINT `consulta_carta` FOREIGN KEY (`ID_Carta`) REFERENCES `Cartas` (`ID_carta`);
+  ADD CONSTRAINT `consulta_carta` FOREIGN KEY (`ID_Carta`) REFERENCES `Cartas` (`ID_carta`),
+  ADD CONSTRAINT `consulta_cliente` FOREIGN KEY (`ID_Cliente`) REFERENCES `Clientes` (`ID_cliente`),
+  ADD CONSTRAINT `consulta_evaluacion` FOREIGN KEY (`ID_Evaluacion`) REFERENCES `Evaluacion` (`ID_evaluacion`);
 
 --
 -- Filtros para la tabla `Evaluacion`
