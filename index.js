@@ -1,10 +1,26 @@
+
 const express = require("express");
 const app = express();
- 
+
+app.use(express.static("public"));
+
+app.use(express.json());
+
+//app.use('/', require ('     '));
+
 app.get("/", (req, res) => {
-    res.send("CaC Deploy!!!!!!!!!!!");
+  res.send("Proyecto Backend Grupo 25 Codo a Codo");
 });
-const PORT = process.env.PORT || 3000;
+app.get('/clientes',(req,res)=>{
 
-app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+});
+app.get('/clientes/:id',(req,res)=>{
 
+});
+//
+app.post('/clientes',(req,res)=>{
+    res.send('Resource created');
+});
+const PORT = 3000;
+
+app.listen(PORT, () => console.log(`${PORT}`));
