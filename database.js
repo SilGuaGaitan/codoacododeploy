@@ -1,3 +1,4 @@
+
 const mysql = require("mysql2");
 
 const connection = mysql.createConnection({
@@ -5,6 +6,7 @@ const connection = mysql.createConnection({
     user: "362549_esmeralda" ,
     password: "M@rtina2024" ,
     database: "silguagaitan_esmeralda",
+    connectionLimit:5,
 });
 
 connection.connect((error)=> {

@@ -1,3 +1,4 @@
+
 const express = require("express");
 const app = express();
 
@@ -5,7 +6,7 @@ app.use(express.static("public"));
 
 app.use(express.json());
 
-app.use('/', require ('     '));
+//app.use('/', require ('     '));
 
 app.get("/", (req, res) => {
   res.send("Proyecto Backend Grupo 25 Codo a Codo");

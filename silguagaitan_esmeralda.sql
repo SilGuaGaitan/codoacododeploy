@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: mysql-silguagaitan.alwaysdata.net
--- Tiempo de generación: 02-07-2024 a las 00:55:24
+-- Tiempo de generación: 02-07-2024 a las 04:31:32
 -- Versión del servidor: 10.6.17-MariaDB
 -- Versión de PHP: 7.4.33
 
@@ -102,6 +102,7 @@ CREATE TABLE `Consulta_cliente` (
   `ID_Cliente` int(10) NOT NULL,
   `ID_Evaluacion` int(3) NOT NULL,
   `ID_Carta` int(2) NOT NULL,
+  `ID_Servicio` int(3) NOT NULL,
   `Motivo_consulta` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -109,18 +110,18 @@ CREATE TABLE `Consulta_cliente` (
 -- Volcado de datos para la tabla `Consulta_cliente`
 --
 
-INSERT INTO `Consulta_cliente` (`ID_consulta`, `ID_Cliente`, `ID_Evaluacion`, `ID_Carta`, `Motivo_consulta`) VALUES
-(1, 1, 111, 6, 'Dinero'),
-(5, 2, 222, 13, 'Amor'),
-(7, 3, 333, 1, 'Amor'),
-(9, 4, 444, 5, 'Salud'),
-(11, 5, 555, 19, 'Dinero'),
-(13, 6, 666, 1, 'Amor'),
-(15, 7, 777, 13, 'Dinero'),
-(19, 8, 888, 8, 'Dinero'),
-(21, 9, 999, 8, 'Amor'),
-(27, 10, 100, 7, 'Dinero'),
-(29, 11, 101, 14, 'Salud');
+INSERT INTO `Consulta_cliente` (`ID_consulta`, `ID_Cliente`, `ID_Evaluacion`, `ID_Carta`, `ID_Servicio`, `Motivo_consulta`) VALUES
+(1, 1, 111, 6, 1, 'Dinero'),
+(5, 2, 222, 13, 4, 'Amor'),
+(7, 3, 333, 1, 5, 'Amor'),
+(9, 4, 444, 5, 3, 'Salud'),
+(11, 5, 555, 19, 7, 'Dinero'),
+(13, 6, 666, 1, 4, 'Amor'),
+(15, 7, 777, 13, 2, 'Dinero'),
+(19, 8, 888, 8, 6, 'Dinero'),
+(21, 9, 999, 8, 5, 'Amor'),
+(27, 10, 100, 7, 1, 'Dinero'),
+(29, 11, 101, 14, 1, 'Salud');
 
 -- --------------------------------------------------------
 
@@ -152,6 +153,32 @@ INSERT INTO `Evaluacion` (`ID_evaluacion`, `ID_cliente`, `Testimonio`, `Califica
 (888, 8, 'Me dieron consejos prácticos y específicos que me han ayudado a tomar decisiones importantes.', 8),
 (999, 9, 'La sesión fue corta y no profundizamos en temas importantes para mí.', 4);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Servicios`
+--
+
+CREATE TABLE `Servicios` (
+  `ID_servicio` int(3) NOT NULL,
+  `Nombre_servicio` varchar(30) NOT NULL,
+  `Descripcion_servicio` text NOT NULL,
+  `Precio` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `Servicios`
+--
+
+INSERT INTO `Servicios` (`ID_servicio`, `Nombre_servicio`, `Descripcion_servicio`, `Precio`) VALUES
+(1, 'Lectura de tarot', 'Se emplean cartas de tarot para realizar lecturas predictivas, introspectivas y de orientación espiritual.', 6500),
+(2, 'Péndulos', 'Se emplea un péndulo para realizar una sesión de radiestesia para obtener respuestas de sí o no mediante movimientos oscilatorios.', 5000),
+(3, 'Cristales', 'Se utilizan cristales y piedras semipreciosas con propiedades energéticas y espirituales únicas para potenciar o equilibrar energías.', 5500),
+(4, 'Incienso', 'Se emplean inciensos para purificar el ambiente antes y después de las sesiones de lectura, y para limpiar las energías negativas.', 5500),
+(5, 'Muñeco vudú', 'Se utiliza muñecos vudú en hechizos de sanación, protección o atracción de energías positivas.', 6700),
+(6, 'Consultoría espiritual', 'Sesiones individuales donde se ofrece asesoramiento y orientación espiritual personalizada sobre temas como desarrollo personal, crecimiento espiritual, manejo de energías o conexiones con guías espirituales.', 7500),
+(7, 'Hierbas místicas', 'Se utilizan hierbas especiales para limpiar y purificar el espacio de energías negativas. Estas hierbas pueden ser quemadas, o bien ser utilizadas en saquitos de hierbas o en baños rituales para promover el bienestar espiritual.', 8000);
+
 --
 -- Índices para tablas volcadas
 --
@@ -175,7 +202,8 @@ ALTER TABLE `Consulta_cliente`
   ADD PRIMARY KEY (`ID_consulta`),
   ADD KEY `ID_Cliente` (`ID_Cliente`),
   ADD KEY `ID_Evaluacion` (`ID_Evaluacion`),
-  ADD KEY `ID_Carta` (`ID_Carta`);
+  ADD KEY `ID_Carta` (`ID_Carta`),
+  ADD KEY `consulta_servicio` (`ID_Servicio`);
 
 --
 -- Indices de la tabla `Evaluacion`
@@ -183,6 +211,12 @@ ALTER TABLE `Consulta_cliente`
 ALTER TABLE `Evaluacion`
   ADD PRIMARY KEY (`ID_evaluacion`),
   ADD KEY `ID_cliente` (`ID_cliente`);
+
+--
+-- Indices de la tabla `Servicios`
+--
+ALTER TABLE `Servicios`
+  ADD PRIMARY KEY (`ID_servicio`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -213,6 +247,12 @@ ALTER TABLE `Evaluacion`
   MODIFY `ID_evaluacion` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000;
 
 --
+-- AUTO_INCREMENT de la tabla `Servicios`
+--
+ALTER TABLE `Servicios`
+  MODIFY `ID_servicio` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -222,7 +262,8 @@ ALTER TABLE `Evaluacion`
 ALTER TABLE `Consulta_cliente`
   ADD CONSTRAINT `consulta_carta` FOREIGN KEY (`ID_Carta`) REFERENCES `Cartas` (`ID_carta`),
   ADD CONSTRAINT `consulta_cliente` FOREIGN KEY (`ID_Cliente`) REFERENCES `Clientes` (`ID_cliente`),
-  ADD CONSTRAINT `consulta_evaluacion` FOREIGN KEY (`ID_Evaluacion`) REFERENCES `Evaluacion` (`ID_evaluacion`);
+  ADD CONSTRAINT `consulta_evaluacion` FOREIGN KEY (`ID_Evaluacion`) REFERENCES `Evaluacion` (`ID_evaluacion`),
+  ADD CONSTRAINT `consulta_servicio` FOREIGN KEY (`ID_Servicio`) REFERENCES `Servicios` (`ID_servicio`);
 
 --
 -- Filtros para la tabla `Evaluacion`
