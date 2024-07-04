@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: mysql-silguagaitan.alwaysdata.net
--- Tiempo de generación: 02-07-2024 a las 04:31:32
--- Versión del servidor: 10.6.17-MariaDB
--- Versión de PHP: 7.4.33
+-- Host: mysql-silguagaitan.alwaysdata.net
+-- Generation Time: Jul 04, 2024 at 04:15 PM
+-- Server version: 10.6.17-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `silguagaitan_esmeralda`
+-- Database: `silguagaitan_esmeralda`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Cartas`
+-- Table structure for table `Cartas`
 --
 
 CREATE TABLE `Cartas` (
@@ -34,7 +34,7 @@ CREATE TABLE `Cartas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `Cartas`
+-- Dumping data for table `Cartas`
 --
 
 INSERT INTO `Cartas` (`ID_carta`, `Nombre_carta`, `Descripcion`) VALUES
@@ -64,7 +64,7 @@ INSERT INTO `Cartas` (`ID_carta`, `Nombre_carta`, `Descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Clientes`
+-- Table structure for table `Clientes`
 --
 
 CREATE TABLE `Clientes` (
@@ -75,7 +75,7 @@ CREATE TABLE `Clientes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Datos de los Usuarios';
 
 --
--- Volcado de datos para la tabla `Clientes`
+-- Dumping data for table `Clientes`
 --
 
 INSERT INTO `Clientes` (`ID_cliente`, `Nombre_cliente`, `Correo_cliente`, `Nacimiento_cliente`) VALUES
@@ -94,7 +94,7 @@ INSERT INTO `Clientes` (`ID_cliente`, `Nombre_cliente`, `Correo_cliente`, `Nacim
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Consulta_cliente`
+-- Table structure for table `Consulta_cliente`
 --
 
 CREATE TABLE `Consulta_cliente` (
@@ -107,7 +107,7 @@ CREATE TABLE `Consulta_cliente` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `Consulta_cliente`
+-- Dumping data for table `Consulta_cliente`
 --
 
 INSERT INTO `Consulta_cliente` (`ID_consulta`, `ID_Cliente`, `ID_Evaluacion`, `ID_Carta`, `ID_Servicio`, `Motivo_consulta`) VALUES
@@ -126,18 +126,18 @@ INSERT INTO `Consulta_cliente` (`ID_consulta`, `ID_Cliente`, `ID_Evaluacion`, `I
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Evaluacion`
+-- Table structure for table `Evaluacion`
 --
 
 CREATE TABLE `Evaluacion` (
   `ID_evaluacion` int(3) NOT NULL,
-  `ID_cliente` int(3) NOT NULL,
+  `ID_cliente` int(10) NOT NULL,
   `Testimonio` text NOT NULL,
   `Calificacion` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `Evaluacion`
+-- Dumping data for table `Evaluacion`
 --
 
 INSERT INTO `Evaluacion` (`ID_evaluacion`, `ID_cliente`, `Testimonio`, `Calificacion`) VALUES
@@ -156,7 +156,7 @@ INSERT INTO `Evaluacion` (`ID_evaluacion`, `ID_cliente`, `Testimonio`, `Califica
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Servicios`
+-- Table structure for table `Servicios`
 --
 
 CREATE TABLE `Servicios` (
@@ -167,7 +167,7 @@ CREATE TABLE `Servicios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `Servicios`
+-- Dumping data for table `Servicios`
 --
 
 INSERT INTO `Servicios` (`ID_servicio`, `Nombre_servicio`, `Descripcion_servicio`, `Precio`) VALUES
@@ -180,23 +180,23 @@ INSERT INTO `Servicios` (`ID_servicio`, `Nombre_servicio`, `Descripcion_servicio
 (7, 'Hierbas místicas', 'Se utilizan hierbas especiales para limpiar y purificar el espacio de energías negativas. Estas hierbas pueden ser quemadas, o bien ser utilizadas en saquitos de hierbas o en baños rituales para promover el bienestar espiritual.', 8000);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `Cartas`
+-- Indexes for table `Cartas`
 --
 ALTER TABLE `Cartas`
   ADD PRIMARY KEY (`ID_carta`);
 
 --
--- Indices de la tabla `Clientes`
+-- Indexes for table `Clientes`
 --
 ALTER TABLE `Clientes`
   ADD PRIMARY KEY (`ID_cliente`);
 
 --
--- Indices de la tabla `Consulta_cliente`
+-- Indexes for table `Consulta_cliente`
 --
 ALTER TABLE `Consulta_cliente`
   ADD PRIMARY KEY (`ID_consulta`),
@@ -206,58 +206,58 @@ ALTER TABLE `Consulta_cliente`
   ADD KEY `consulta_servicio` (`ID_Servicio`);
 
 --
--- Indices de la tabla `Evaluacion`
+-- Indexes for table `Evaluacion`
 --
 ALTER TABLE `Evaluacion`
   ADD PRIMARY KEY (`ID_evaluacion`),
   ADD KEY `ID_cliente` (`ID_cliente`);
 
 --
--- Indices de la tabla `Servicios`
+-- Indexes for table `Servicios`
 --
 ALTER TABLE `Servicios`
   ADD PRIMARY KEY (`ID_servicio`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `Cartas`
+-- AUTO_INCREMENT for table `Cartas`
 --
 ALTER TABLE `Cartas`
   MODIFY `ID_carta` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
--- AUTO_INCREMENT de la tabla `Clientes`
+-- AUTO_INCREMENT for table `Clientes`
 --
 ALTER TABLE `Clientes`
   MODIFY `ID_cliente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT de la tabla `Consulta_cliente`
+-- AUTO_INCREMENT for table `Consulta_cliente`
 --
 ALTER TABLE `Consulta_cliente`
   MODIFY `ID_consulta` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT de la tabla `Evaluacion`
+-- AUTO_INCREMENT for table `Evaluacion`
 --
 ALTER TABLE `Evaluacion`
   MODIFY `ID_evaluacion` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000;
 
 --
--- AUTO_INCREMENT de la tabla `Servicios`
+-- AUTO_INCREMENT for table `Servicios`
 --
 ALTER TABLE `Servicios`
   MODIFY `ID_servicio` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `Consulta_cliente`
+-- Constraints for table `Consulta_cliente`
 --
 ALTER TABLE `Consulta_cliente`
   ADD CONSTRAINT `consulta_carta` FOREIGN KEY (`ID_Carta`) REFERENCES `Cartas` (`ID_carta`),
@@ -266,7 +266,7 @@ ALTER TABLE `Consulta_cliente`
   ADD CONSTRAINT `consulta_servicio` FOREIGN KEY (`ID_Servicio`) REFERENCES `Servicios` (`ID_servicio`);
 
 --
--- Filtros para la tabla `Evaluacion`
+-- Constraints for table `Evaluacion`
 --
 ALTER TABLE `Evaluacion`
   ADD CONSTRAINT `Evaluacion_ibfk_1` FOREIGN KEY (`ID_cliente`) REFERENCES `Clientes` (`ID_cliente`);
