@@ -44,11 +44,9 @@ app.get('/Clientes', async (req, res) => {
 
 app.get('/Clientes/:id',async (req, res) => {
   // Implementa la lógica para obtener un cliente por ID
-  const id= req.params.id
-  const sql = ` SELECT * FROM Clientes WHERE ID_cliente= ?`;
-
+  const id= req.params.id;
+  const sql = ` SELECT * FROM Clientes WHERE ID_cliente = ?`;
   try {
-    
     const connection = await pool.getConnection();
     const [rows] = await connection.query(sql, [id]);
     connection.release();
@@ -65,11 +63,11 @@ app.post('/Clientes', async (req, res) => {
 
   const cliente = req.body;
 
-  const sql = `INSERT INTO Clientes SET ?`;
+  const sql =`INSERT INTO Clientes SET ?`;
 
   try {
       const connection = await pool.getConnection()
-      const [rows] = await connection.query(sql, [producto]);
+      const [rows] = await connection.query(sql, [cliente]);
       connection.release();
       res.send(`
           <h1>Cliente creado con id: ${rows.insertId}</h1>
@@ -86,7 +84,7 @@ app.put('/Clientes/:id', async (req, res) => {
 
   try {
       const connection = await pool.getConnection()
-      const [rows] = await connection.query(sql, [producto, id]);
+      const [rows] = await connection.query(sql, [cliente, id]);
       connection.release();
       console.log(rows)
        res.send(`
@@ -115,5 +113,5 @@ app.delete('/Clientes/:id', async (req, res) => {
 });
 
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
