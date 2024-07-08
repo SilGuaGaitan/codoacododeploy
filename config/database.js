@@ -1,20 +1,12 @@
 
-const mysql = require("mysql2");
+import mysql from 'mysql2/promise';
 
-const connection = mysql.createConnection({
+const pool = mysql.createPool({
     host: "mysql-silguagaitan.alwaysdata.net",
-    user: "362549_esmeralda" ,
-    password: "M@rtina2024" ,
+    user: "362549_esmeralda",
+    password: "M@rtina2024",
     database: "silguagaitan_esmeralda",
-    connectionLimit:5,
+    connectionLimit: 5
 });
 
-connection.connect((error)=> {
-    if(error) {
-        return console.error(error);
-    }
-    console.log("¡Conexión Exitosa!");
-});
-
-module.exports = connection;
 export default pool;

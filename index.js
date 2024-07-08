@@ -11,9 +11,12 @@ app.get("/", (req, res) => {
   res.send("Proyecto Backend Grupo 25 Codo a Codo");
 });
 
+
+
 /*CRUD Aclaracion:
 Tener en cuenta las restricciones en las relaciones de las tablas, y seguir
 el orden correcto para crear y borrar los clientes, las evaluaciones y las consultas!!!*/
+
 
 /*Peticion GET para traer a todos los clientes con su motivo de consulta, servicio 
  solicitado y su testimonio:*/
@@ -66,9 +69,9 @@ app.get('/Clientes/:id',async (req, res) => {
     const [rows] = await connection.query(sql, [id]);
     connection.release();
     console.log("Connection released.");
+
     res.json(rows[0]);
-  } 
-  catch (error) {
+  } catch (error) {
     console.error("Error during database operation:", error);
     res.status(500).send('Internal server error');
   }
@@ -89,8 +92,7 @@ app.post('/Clientes', async (req, res) => {
           <h1>Cliente creado con id: ${rows.insertId}</h1>
       `);
   } catch (error) {
-    console.error("Error during database operation:", error);
-    res.status(500).send('Internal server error');
+      res.send(500).send('Internal server error')
   }
 });
 
